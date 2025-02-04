@@ -1,27 +1,5 @@
-// import { cookies } from "next/headers";
-// import { NextRequest, NextResponse } from "next/server";
-
-// export async function middleware(request: NextRequest) {
-//   const cookieStore = await cookies();
-
-//   const IsLogin = cookieStore.get("IsLogin")?.value;
-
-//   if (IsLogin === "0" && request.nextUrl.pathname === "/") {
-//     return NextResponse.redirect(new URL("/Admin", request.url));
-//   }
-
-//   if (IsLogin === "1" && request.nextUrl.pathname === "/login") {
-//     return NextResponse.redirect(new URL("/", request.url));
-//   }
-// }
-
-// export const config = {
-//   matcher: ["/", "/Admin"],
-// };
-
-// ./src/middleware.ts
-
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 // Define public routes, for example, the sign-in page
 const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/signup(.*)"]);
@@ -37,6 +15,15 @@ export default clerkMiddleware(async (auth, request) => {
       await auth.protect(); // If not authenticated, it will redirect to sign-in
     }
   }
+
+  // Add Cache-Control headers to all responses
+  const response = NextResponse.next();
+  response.headers.set(
+    "Cache-Control",
+    "public, s-maxage=60, stale-while-revalidate=59",
+  );
+
+  return response;
 });
 
 export const config = {
