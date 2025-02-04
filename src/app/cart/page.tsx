@@ -176,12 +176,10 @@ const CartPage = () => {
               <h3 className="font-medium mb-4">Shipping</h3>
               <div className="flex justify-between items-center mb-2">
                 <p className="text-gray-600">Arrives by {getDeliveryDate()}</p>
-                <Link href="#" className="text-gray-900 underline">
-                  Edit Location
-                </Link>
+               
               </div>
               <div className="mt-4">
-                <Link href="#" className="text-gray-900 underline">
+                <Link href="/findstore" className="text-gray-900 underline">
                   Find a Store
                 </Link>
               </div>
