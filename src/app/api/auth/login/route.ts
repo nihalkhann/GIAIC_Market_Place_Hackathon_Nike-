@@ -7,11 +7,9 @@ export async function POST(req: Request) {
 
     const { username, password } = body;
 
-    // // Replace these with environment variables in production
-    // const ADMIN_USERNAME = process.env.NEXT_PUBLIC_ADMIN_USERNAME;
-    // const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
-    const ADMIN_USERNAME = "admin";
-    const ADMIN_PASSWORD = "adminn";
+    const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+    
 
     console.log("Env variables:", { ADMIN_USERNAME, ADMIN_PASSWORD });
 
